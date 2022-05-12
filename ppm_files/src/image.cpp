@@ -37,7 +37,13 @@ void Image::setPixel(int x, int y, Pixel color) {
 }
 
 void Image::setPixelData(Pixel ***pixels) {
-	delete pixels_;
+	for (int y = 0; y < getSize().height; y++) {
+		for (int x = 0; x < getSize().width; x++) {
+			delete pixels_[y][x];
+		}
+		delete[] pixels_[y];
+	}
+	delete[] pixels_;
 	pixels_ = pixels;
 }
 
